@@ -4,6 +4,7 @@ import "crypto/sha256"
 import "fmt"
 import "os"
 import "github.com/itchyny/base58-go"
+import "math/big"
 
 func sha2560f(input string) []byte {
   algorithm := sha256.New() 
@@ -13,7 +14,7 @@ func sha2560f(input string) []byte {
 
 func base58Encoded(bytes []byte) string {
   encoding := base58.BitcoinEncoding
-  encoded, err = encoding.Encode(bytes)
+  encoded, err := encoding.Encode(bytes)
   if err != nil {
     fmt.Println(err.Error())
     os.Exit(1)
@@ -21,7 +22,7 @@ func base58Encoded(bytes []byte) string {
   return string(encoded)
 }
 
-func GenerateShortLink(initialLink string, userId, string) string {
+func GenerateShortLink(initialLink string, userId string) string {
   urlHashBytes := sha2560f(initialLink + userId)
   generatedNumber := new(big.Int).SetBytes(urlHashBytes).Uint64()
   finalString := base58Encoded([]byte(fmt.Sprintf("%d", generatedNumber)))
