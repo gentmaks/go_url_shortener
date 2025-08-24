@@ -2,6 +2,7 @@
 
 ## To run the project do the following:
 
+- clone the repo
 - `cd` into the project directory
 - make sure to have redis spinning by running the following command `redis-server`
 - run `go run main.go` to start our server
