@@ -1,8 +1,19 @@
 package main 
 
 import "fmt"
+import "github.com/gin-gonic/gin"
 
 func main() {
-  fmt.Printf("Hello world!\n")
-}
 
+  r := gin.Default()
+  r.GET("/", func(c *gin.Context) {
+    c.JSON(200, gin.H{
+      "message": "URL shortener...",
+    })
+  })
+  
+  err := r.Run(":9808")
+  if err != nil {
+    panic(fmt.Sprintf("Failed to start the web server - Error: %v", err))
+  }
+}
